@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<div class="citation">
+
+  <header class="citation-header">
+    <h1 class="citation-title">{{ page.title }}</h1>
+  </header>
+
+  <a href="/refs{{ page.biblatexUrl }}">BibLaTeX</a>
+
+  <article class="citation-fields">
+    <table>
+      {% for aField in site.data['citationFieldOrder']['order'] %}
+        {% if page.biblatex[aField] %}
+      <tr>
+          {% if site.data['citationFieldOrder']['outputMap'][aField]['text'] %}
+        <th>{{ site.data['citationFieldOrder']['outputMap'][aField]['text'] }}:</th>
+          {% else %}
+        <th>{{ aField }}:</th>
+          {% endif %}
+          {% if site.data['citationFieldOrder']['outputMap'][aField]['include'] %}
+        <td>
+            {% assign templateName = site.data['citationFieldOrder']['outputMap'][aField]['include'] %}
+            {% assign varName = page.biblatex[aField] %}
+            {% varInclude templateName varName %}
+        </td>
+          {% else %}
+        <td>{{ page.biblatex[aField] }}</td>
+          {% endif %}
+      </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  </article>
+
+  <hr>
+
+  <article class="citation-content">
+    {{ content }}
+  </article>
+
+</div>

@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<div class="index">
+
+  <header class="index-header">
+    <h1 class="index-title">{{ page.title }}</h1>
+  </header>
+
+  <div>
+    {% for aLink in page.rootIndex %}
+    <a href="/refs/{{ aLink['url'] }}">{{ aLink['linkText'] }}</a>
+    {% endfor %}
+  </div>
+
+  <div>
+    {% for aLink in page.subIndex %}
+    <a href="/refs/{{ aLink['url'] }}">{{ aLink['linkText'] }}</a>
+    {% endfor %}
+  </div>
+
+  <div>
+    <ul>
+      {% for aLink in page.index %}
+      <li>
+        <a href="/refs/{{ aLink['url'] }}">{{ aLink['linkText'] }}</a>
+        {% unless aLink['auxText'].empty? %}
+          <br>{{ aLink['auxText'] }}
+        {% endunless %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>

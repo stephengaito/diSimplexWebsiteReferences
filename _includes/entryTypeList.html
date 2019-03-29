@@ -1,0 +1,23 @@
+<p>
+{% for entryType in entryTypes %}
+ <a href="#{{entryType[0]}}">{{entryType[0]}}</a> 
+{% endfor %}
+</p>
+
+<ul>
+{% for entryType in entryTypes %}
+  <li><strong><a id="{{entryType[0]}}">{{entryType[0]}}</a></strong> {{ entryType[1]['comment'] }}
+  <ul>
+    <li><strong>type:</strong> {{entryType[1]['type']}}</a></li>
+    <li><strong>aliases:</strong> {% for alias in entryType[1]['aliases'] %} <a href="#{{alias}}">{{alias]}}</a> {% endfor %}</li>
+    <li><strong>required fields:</strong> {% for field in entryType[1]['requiredFields'] %} <a href="#{{field}}">{{field}}</a> {% endfor %}</li>
+    <li><strong>useful fields:</strong> {% for field in entryType[1]['usefulFields'] %} <a href="#{{field}}">{{field}}</a> {% endfor %}</li>
+    <li><strong>optional fields:</strong> {% for field in entryType[1]['optionalFields'] %} <a href="#{{field}}">{{field}}</a> {% endfor %}</li>
+    <li><strong>biblatex:</strong> {% for entry in entryType[1]['biblatex'] %} <a href="biblatex.html#{{entry}}">{{entry}}</a> {% endfor %}</li>
+    <li><strong>bibtex:</strong> {% for entry in entryType[1]['bibtex'] %} <a href="bibtex.html#{{entry}}">{{entry}}</a> {% endfor %}</li>
+    <li><strong>amsrefs:</strong> {% for entry in entryType[1]['amsrefs'] %} <a href="amsrefs.html#{{entry}}">{{entry}}</a> {% endfor %}</li>
+    <li><strong>aigaion:</strong> {% for entry in entryType[1]['aigaion'] %} <a href="aigaion.html#{{entry}}">{{entry}}</a> {% endfor %}</li>
+  </ul></li>
+{% endfor %}
+</ul>
+

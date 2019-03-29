@@ -1,0 +1,7 @@
+---
+layout: citation
+title: {{ title }}
+biblatex:
+{% for field in biblatexFields %} {{ field }}: {{ biblatex[field] }}
+{% endfor %}
+---

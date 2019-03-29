@@ -1,0 +1,18 @@
+#
+# The following files are derived using crossreference.rb from the 
+# corresponding *.yml.orig files
+#
+aigaionFields.yml
+aigaionTypes.yml
+amsrefsFields.yml
+amsrefsTypes.yml
+biblatexFields.yml
+biblatexTypes.yml
+bibtexFields.yml
+bibtexTypes.yml
+citationFieldOrder.yml
+monthNum2Names.yml
+nonAsciiFields.yml
+replacedCiteKeys.yml
+biblatexFieldOrder.yml
+biblatexFieldsXapianTerms.yml

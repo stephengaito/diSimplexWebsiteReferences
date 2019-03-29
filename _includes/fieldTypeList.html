@@ -1,0 +1,23 @@
+<p>
+{% for fieldType in fieldTypes %}
+ <a href="#{{fieldType[0]}}">{{fieldType[0]}}</a> 
+{% endfor %}
+</p>
+
+<ul>
+{% for fieldType in fieldTypes %}
+  <li><a id="{{fieldType[0]}}"><strong>{{fieldType[0]}}</strong></a> {{fieldType[1]['comment']}}
+  <ul>
+    <li><strong>type:</strong> {{fieldType[1]['type']}}</a></li>
+    <li><strong>structure:</strong> {{fieldType[1]['structure']}}</a></li>
+    <li><strong>required by:</strong> {% for entry in fieldType[1]['requiredBy'] %} <a href="#{{entry}}">{{entry}}</a> {% endfor %}</li>
+    <li><strong>useful for:</strong> {% for entry in fieldType[1]['usefulFor'] %} <a href="#{{entry}}">{{entry}}</a> {% endfor %}</li>
+    <li><strong>optional for:</strong> {% for entry in fieldType[1]['optionalFor'] %} <a href="#{{entry}}">{{entry}}</a> {% endfor %}</li>
+    <li><strong>biblatex:</strong> {% for field in fieldType[1]['biblatex'] %} <a href="biblatex.html#{{field}}">{{field}}</a> {% endfor %}</li>
+    <li><strong>bibtex:</strong> {% for field in fieldType[1]['bibtex'] %} <a href="bibtex.html#{{field}}">{{field}}</a> {% endfor %}</li>
+    <li><strong>amsrefs:</strong> {% for field in fieldType[1]['amsrefs'] %} <a href="amsrefs.html#{{field}}">{{field}}</a> {% endfor %}</li>
+    <li><strong>aigaion:</strong> {% for field in fieldType[1]['aigaion'] %} <a href="aigaion.html#{{field}}">{{field}}</a> {% endfor %}</li>
+  </ul></li>
+{% endfor %}
+</ul>
+

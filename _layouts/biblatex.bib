@@ -1,0 +1,8 @@
+---
+layout: null
+---
+@{{page.biblatex['entrytype']}}{%raw%}{{%endraw%}{{page.biblatex['citekey']}},
+{% for aField in site.data['biblatexFieldOrder']['order'] %}{% if page.biblatex[aField] %}
+  {{aField}} = {%raw%}{{%endraw%}{% if site.data['biblatexFieldOrder']['outputMap'][aField]['include'] %}{% assign templateName = site.data['biblatexFieldOrder']['outputMap'][aField]['include'] %}{% assign varName = page.biblatex[aField]}} %}{% varInclude templateName varName %}{% else %}{{page.biblatex[aField]}}{%endif%}{%raw%}}{%endraw%},
+{% endif %}{% endfor %}
+}

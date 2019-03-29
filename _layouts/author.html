@@ -1,0 +1,64 @@
+---
+layout: default
+---
+<div class="author">
+
+  <header class="author-header">
+    <h1 class="author-title">{{ page.title }}</h1>
+  </header>
+
+  <article class="author-fields">
+    <table>
+      <tr>
+        <th>clean name:</th>
+        <td>{{ page.biblatex['cleanname']}}</td>
+      </tr>
+      <tr>
+        <th>synonym of:</th>
+        <td>{{ page.biblatex['synonymOf']}}</td>
+      </tr>
+      <tr>
+        <th>first name:</th>
+        <td>{{ page.biblatex['firstname']}}</td>
+      </tr>
+      <tr>
+        <th>von:</th>
+        <td>{{ page.biblatex['von']}}</td>
+      </tr>
+      <tr>
+        <th>last name:</th>
+        <td>{{ page.biblatex['surname']}}</td>
+      </tr>
+      <tr>
+        <th>jr:</th>
+        <td>{{ page.biblatex['jr']}}</td>
+      </tr>
+      <tr>
+        <th>institute:</th>
+        <td>{{ page.biblatex['institute']}}</td>
+      </tr>
+      <tr>
+        <th>email:</th>
+        <td>{% if page.biblatex['email'] %} <a href="mailto:{{ page.biblatex['email']}}">{{page.biblatex['email']}}</a> {%endif%}</td>
+      </tr>
+      <tr>
+        <th>url:</th>
+        <td>
+          <ul>
+          {% for aUrl in page.biblatex['url'] %}
+            <li><a href="{{aUrl}}">{{aUrl}}</a></li>
+          {%endfor%}
+          </ul>
+        </td>
+      </tr>
+      <!--#include file="/refs/{{ page.citationsUrl }}" -->
+    </table>
+  </article>
+
+  <hr>
+
+  <article class="author-content">
+    {{ content }}
+  </article>
+
+</div>
