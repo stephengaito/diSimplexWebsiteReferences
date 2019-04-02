@@ -20,6 +20,9 @@ module XapianIndexer
     @xapianIndexer.index_text_without_positions(
       removeStopWords(cleanName), 1, 'A')
     @xapianIndexer.index_text_without_positions(
+      removeStopWords(pageData['biblatex']['entrytype']), 1, 'XT') if
+      pageData['biblatex'].has_key?('entrytype')
+    @xapianIndexer.index_text_without_positions(
       removeStopWords(page[:content]), 1, 'XC') unless
       page[:content].empty?
     @xapianIndexer.index_text_without_positions(

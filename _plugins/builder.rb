@@ -11,6 +11,7 @@ module Builder
         "path"          => page[:file],
         "url"           => page[:url],
         "biblatexUrl"   => page[:url].sub(/\.html/, '.bib'),
+        "bibcontextUrl" => page[:url].sub(/\.html/, '.lua'),
         "citationsUrl"  => page[:url].sub(/\.html/, 'Citations.html')
       }
     )
@@ -86,6 +87,13 @@ module Builder
     biblatexPage[:metaData]['layout'] = 'biblatex'
     biblatexPage[:url] = page[:url].sub(/\.html$/,'.bib')
     biblatexPage
+  end
+
+  def createBibConTeXtPage(page)
+    bibcontextPage = page.clone
+    bibcontextPage[:metaData]['layout'] = 'bibcontext'
+    bibcontextPage[:url] = page[:url].sub(/\.html$/,'.lua')
+    bibcontextPage
   end
 
   def addIndexItem(index, indexKey, key, url, linkText, auxText = "")
@@ -200,6 +208,7 @@ module Builder
     addAuthorCitationPages(page)
     renderPage(page, site)
     renderPage(createBibLaTeXPage(page), site)
+    renderPage(createBibConTeXtPage(page), site)
     removeFromDataFileCache(page[:file])
   end
 
@@ -236,7 +245,7 @@ module Builder
   def cachingLoadJekyllDataFile(aJekyllDataFile)
     return @jekyllDataFiles[aJekyllDataFile] if
       @jekyllDataFiles.has_key?(aJekyllDataFile)
-
+    #puts "loading: [#{aJekyllDataFile}]"
     someJekyllData = origLoadJekyllDataFile(aJekyllDataFile)
     @jekyllDataFiles[aJekyllDataFile] = someJekyllData
 
@@ -329,7 +338,8 @@ module Octopress
           options.delete('save')
           @options = options
           clearDataFileCache
-          site = Octopress.site
+          siteOpts = Jekyll.configuration(options)
+          site = Jekyll::Site.new(siteOpts)
           site.layouts = Jekyll::LayoutReader.new(site).read
           site.data = Jekyll::DataReader.new(site).read(site.config["data_dir"])
           FileUtils.mkdir_p(site.config['destination'])

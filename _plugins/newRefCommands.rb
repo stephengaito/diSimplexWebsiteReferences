@@ -124,8 +124,11 @@ module Octopress
         options['title']    = biblatex['title']
 
         options['path'] = 'cite/'+citation2urlBase(biblatex['citekey'])+'.md'
-        Page.new(Octopress.site(options), options).write if
-          !File.exists?(options['path'])
+        if !File.exists?(options['path']) then
+          siteOpts = Jekyll.configuration(options)
+          site = Jekyll::Site.new(siteOpts)
+          Page.new(site, options).write
+         end
         system("nano +16 #{options['path']}")
       else
         system("nano +16 #{citationPath}")
@@ -151,6 +154,9 @@ module Octopress
     end
 
     def addAuthor(options)
+      require 'pp'
+      options["source"]   = '.'
+      options["destination"] = '_site'
       options['template'] = 'author'
       options['type']     = 'author'
       options['layout']   = 'author'
@@ -187,8 +193,12 @@ module Octopress
         options['title'] = options['cleanname']
           
         options['path'] = author2urlBase(options['cleanname'])+'.md'
-        Page.new(Octopress.site(options), options).write if
-          !File.exists?(options['path'])
+        pp options
+        if !File.exists?(options['path']) then
+          siteOpts = Jekyll.configuration(options)
+          site = Jekyll::Site.new(siteOpts)
+          Page.new(site, options).write
+         end
         system("nano +16 #{options['path']}")
       else
         system("nano +16 #{authorPath}")
