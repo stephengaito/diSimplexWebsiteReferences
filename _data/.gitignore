@@ -16,3 +16,4 @@ nonAsciiFields.yml
 replacedCiteKeys.yml
 biblatexFieldOrder.yml
 biblatexFieldsXapianTerms.yml
+*.swp
